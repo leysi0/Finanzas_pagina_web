@@ -18,42 +18,41 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.edu.upc.model.Venta;
-import pe.edu.upc.service.IVentaService;
+import pe.edu.upc.model.VentaXProducto;
+import pe.edu.upc.service.IVentaXProductoService;
 
 @Controller
-@RequestMapping("/venta")
-public class VentaController {
+@RequestMapping("/ventaproducto")
+public class VentaXProductoController {
 
 	@Autowired
-	private IVentaService vService;
+	private IVentaXProductoService vPService;
 
 	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute @Valid Venta objVenta, BindingResult binRes, Model model) 
+	public String registrar(@ModelAttribute @Valid VentaXProducto objVPenta, BindingResult binRes, Model model) 
 	throws ParseException
 	{
 		if (binRes.hasErrors()) {
-			model.addAttribute("listcredito",vService.listar());
-			return "cliente";
+			model.addAttribute("listVentaProducto",vPService.listar());
+			return "VentaProducto";
 		}
 		
 		else {
-			Date requestday=new Date();
-			objVenta.setFecha_venta(requestday);
 			
-			boolean flag = vService.insertar(objVenta);
+			boolean flag = vPService.insertar(objVPenta);
 			if (flag) {
-				return "redirect:/venta/listar";
+				return "redirect:/ventaproducto/listar";
 			}
 			else {
 				model.addAttribute("mensaje", "Sucedio un error");
-				return "redirect:/venta/irRegistrarVenta";
+				return "redirect:/ventaproducto/irRegistrarVenta";
 			}
 		}
 		}
 
 	@RequestMapping("/irRegistrarVenta")
 	public String irRegistrar(Model model) {
-		model.addAttribute("venta", new Venta());
+		model.addAttribute("ventaProducto", new Venta());
 		return "registro";
 	}
 	
@@ -62,45 +61,44 @@ public class VentaController {
 	{
 		try {
 			if (id!=null && id > 0) {
-				vService.eliminar(id);
-				model.put("listVentas", vService.listar());
+				vPService.eliminar(id);
+				model.put("listVentas", vPService.listar());
 			}
 		}
 		catch(Exception ex) {
 			System.out.println(ex.getMessage());
 			model.put("mensaje", "sucedio un error");
-			model.put("listVentas", vService.listar());
+			model.put("listVentasXProductos", vPService.listar());
 		}
 		return "listVenta";
 	}
 	
 	@RequestMapping("/listar")
 	public String listar(Map<String, Object> model) {
-	   	model.put("venta", new Venta());
+	   	model.put("ventaXproducto", new Venta());
  		return "listVenta";
 	}
 	
 	@RequestMapping("/modificar/{id}")
 	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir){
 		
-		Optional<Venta> cliente = vService.listarId(id);
+		Optional<VentaXProducto> cliente = vPService.listarId(id);
 		
 		if (cliente == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un rochesin");
-			return "redirect:/venta/listar";
+			return "redirect:/ventaproducto/listar";
 		}
 		else {
 			model.addAttribute("venta", cliente.get());
-			return "Modificar_Venta";
+			return "Modificar_ventaproducto";
 		}
 	}
 	
 	@RequestMapping("/guardar")
-	public String guardar(@ModelAttribute @Valid Venta objVenta, BindingResult binRes, Model model) throws ParseException
+	public String guardar(@ModelAttribute @Valid VentaXProducto objVenta, BindingResult binRes, Model model) throws ParseException
 	{
-			Date requestday = new Date();
-			objVenta.setFecha_venta(requestday);
-			boolean flag = vService.modificar(objVenta);
+		
+			boolean flag = vPService.modificar(objVenta);
 			if (flag) {
 				return "redirect:/venta/listar";
 			}
