@@ -25,7 +25,7 @@ import pe.edu.upc.service.IVentaXProductoService;
 @RequestMapping("/ventaproducto")
 public class VentaXProductoController {
 
-	@Autowired
+	/*@Autowired
 	private IVentaXProductoService vPService;
 
 	@RequestMapping("/registrar")
@@ -107,5 +107,5 @@ public class VentaXProductoController {
 				return "ModificarVenta";
 			}
 		}
-	
+	*/
 }

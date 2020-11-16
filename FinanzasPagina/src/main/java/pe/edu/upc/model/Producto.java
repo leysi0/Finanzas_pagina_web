@@ -32,8 +32,6 @@ public class Producto implements Serializable {
 	@Column(name = "precioProducto", nullable =false)
 	private double precioProducto;
 
-	@NotEmpty(message="No puede estar vacio")
-	@NotBlank(message="No puede estar en blanco")
 	@Column(name="cantidadDisponible", nullable=false)
 	private int cantidadDisponible;
 	

@@ -27,9 +27,7 @@ public class Cliente implements Serializable {
 	@NotBlank(message="No puede estar en blanco")
 	@Column(name = "nombreCliente", length=80, nullable =false)
 	private String nombreCliente;
-	
-	@NotEmpty(message="No puede estar vacio")
-	@NotBlank(message="No puede estar en blanco")
+
 	@Column(name="DNI", nullable=false)
 	private int DNI;
 	
@@ -41,10 +39,7 @@ public class Cliente implements Serializable {
 	@Column(name="fecha_creación", length=60, nullable=false)
 	private Date fecha_creación;
 	
-	@OneToOne
-	@JoinColumn(name = "idCredito", nullable =false)
-	private Credito credito;
-
+	
 	public int getIdCliente() {
 		return idCliente;
 	}
@@ -83,14 +78,6 @@ public class Cliente implements Serializable {
 
 	public void setFecha_creación(Date fecha_creación) {
 		this.fecha_creación = fecha_creación;
-	}
-
-	public Credito getCredito() {
-		return credito;
-	}
-
-	public void setCredito(Credito credito) {
-		this.credito = credito;
 	}
 
 	

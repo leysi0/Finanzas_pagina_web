@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import pe.edu.upc.model.Venta;
 import pe.edu.upc.model.VentaXProducto;
 import pe.edu.upc.repository.IVentaRepository;
-import pe.edu.upc.repository.IVentaXProductoRepository;
 import pe.edu.upc.service.IVentaService;
 import pe.edu.upc.service.IVentaXProductoService;
 
@@ -18,7 +17,7 @@ import pe.edu.upc.service.IVentaXProductoService;
 @Service
 public class VentaXProductoServiceimpl implements IVentaXProductoService {
 	
-	@Autowired
+	/* @Autowired
 	private IVentaXProductoRepository vPVenta;
 
 	@Override
@@ -65,5 +64,5 @@ public class VentaXProductoServiceimpl implements IVentaXProductoService {
 
 		return vPVenta.findById(idVenta);		
 	}
-	
+	*/
 }

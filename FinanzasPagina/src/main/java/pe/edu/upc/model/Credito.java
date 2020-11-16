@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -36,6 +38,11 @@ public class Credito implements Serializable {
 	@Column(name="saldo_disponible", nullable=false)
 	private double saldo_disponible;
 
+	@OneToOne
+	@JoinColumn(name = "idCliente", nullable =false)
+	private Cliente cliente;
+
+	
 	public int getIdCredito() {
 		return idCredito;
 	}
@@ -74,6 +81,14 @@ public class Credito implements Serializable {
 
 	public void setSaldo_disponible(double saldo_disponible) {
 		this.saldo_disponible = saldo_disponible;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	
 

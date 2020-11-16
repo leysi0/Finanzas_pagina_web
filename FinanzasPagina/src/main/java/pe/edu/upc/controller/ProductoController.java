@@ -51,7 +51,7 @@ public class ProductoController {
 	@RequestMapping("/irRegistrarProducto")
 	public String irRegistrar(Model model) {
 		model.addAttribute("producto", new Producto());
-		return "productoregister";
+		return "Añadir_producto";
 	}
 	
 	@RequestMapping("/eliminar")
@@ -68,7 +68,7 @@ public class ProductoController {
 			model.put("mensaje", "sucedio un error");
 			model.put("listproductos", pService.listar());
 		}
-		return "listProducto";
+		return "Lista_productos";
 	}
 	
 	@RequestMapping("/listar")
@@ -80,8 +80,8 @@ public class ProductoController {
         UserDetails  userDetail = (UserDetails) auth.getPrincipal();
         cuenta2 = this.uService.getAccount(userDetail.getUsername()); //username=correo*/
 		
-    	model.put("producto", new Producto());
- 		return "listProducto";
+    	model.put("listproductos", pService.listar());
+ 		return "Lista_productos";
 	}
 	
 	@RequestMapping("/modificar/{id}")
